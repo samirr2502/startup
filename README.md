@@ -1,4 +1,4 @@
-# startup-example
+# startup
 
 #CS 260 Fall 2024 project Git Example
 ##Start up Specification
