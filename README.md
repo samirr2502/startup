@@ -13,9 +13,12 @@ As a counselor to a ward and also a member I have been always intrigued by why a
 
 ### Key Features
 1.) Leaders Plan Meetings together
+
 2.) a.Members view and comment on Meetings
     b.Members (Participants) request to participate next meeting
+    
 3.) Leaders and Admin Manage members(users) and meetings
+
 
 ### Technologies 
 
