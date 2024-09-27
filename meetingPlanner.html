@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <!-- Tell browsers not to scale the viewport automatically -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://kit.fontawesome.com/ce71fe28ca.js" crossorigin="anonymous"></script>
+    <title>Meetings Planner</title>
+    <link rel="icon" href="" />
+</head>
+
+<body>
+    <!-- Use header, main, and footer elements to give semantic structure -->
+    <header>
+        <h1>Meetigns Planner<sup>&reg;</sup></h1>
+        <div class="user_info">
+            <ul>
+                <li>UserName</li>
+                <li><a href="index.html">Log out</a></li> <!--This will be changed eventually-->
+            </ul>
+        </div>
+        <nav>
+            <menu>
+                <li><a class="active_nav_page" href="home.html">Home</a></li>
+                <li><a href="meetingViewer.html">Meeting Viewer</a></li>
+                <li><a href="meetingPlanner.html">Meeting Planner</a></li>
+                <li><a href="management.html">Management</a></li>
+            </menu>
+        </nav>
+        <hr />
+    </header>
+    <main>
+        <h2>Welcome, <span>[%user]</span></h2>
+        <i class='fas fa-edit' style='font-size:24px'></i>
+        <h2>Editing meeting</h2>
+        <div id="api_phrase_div">
+            <p>This will have a cool phrase coming from an API</p>
+        </div>
+        <div class="planner_container">
+            <section class="meeting_edit_log">
+                <div class="log_heading">
+                    <h4>Meeting log</h4>
+                    <div>logged users:
+                        <ul>
+                            <li>User 1 - Role</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="list_of_logs">
+                    <ul>
+                        <li>User 1 changed Initial Prayer [From
+                            <span>old text</span> to <span>new text</span>]
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section class="meeting_edit_box">
+                <form>
+                    <hr />
+
+                    <div class="meeting_heading">
+                        <h4>Edit Meeting:</h4>
+                        <label for="date">Select Date</label>
+                        <input id="date" type="datetime-local">
+                        <div class="input_element">
+                            <label for="presides">Presides</label>
+                            <input id="presides" type="text">
+                        </div>
+                        <div class="input_element">
+                            <label for="conducts">Conducts</label>
+                            <input id="conducts" type="text">
+                        </div>
+                        <div class="input_element">
+                            <label for="pianoPlayer">Piano</label>
+                            <input id="pianoPlayer" type="text">
+                        </div>
+                        <div class="input_element">
+                            <label for="music">Music</label>
+                            <input id="music" type="text">
+                        </div>
+                    </div>
+                    <hr />
+
+                    <div class="meeting_intro">
+                        <div class="input_element">
+                            <label for="initialHymn">Initial Hymn</label>
+                            <select>
+                                <option>#1</option>
+                                <option>#2</option>
+                                <option>#3</option>
+                            </select>
+                        </div>
+                        <div class="input_element">
+                            <label for="initialPrayer">Initial Prayer</label>
+                            <input id="initialPrayer" type="text">
+                        </div>
+                    </div>
+                    <div class="announcements">
+                        <p>Announcements:</p>
+                        <button id="addAnnouncement">Add</button>
+                        <template>
+                            <ul>
+                                <li>Announcement 1: </li>
+                            </ul>
+                        </template>
+                    </div>
+                    <div class="input_element">
+                        <label for="sacramentHymn">Sacrament Hymn</label>
+                        <select>
+                            <option>#1</option>
+                            <option>#2</option>
+                            <option>#3</option>
+                        </select>
+                    </div>
+                    <div class="speakers">
+                        <p>Speakers:</p>
+                        <button id="addSpeacker">Add</button>
+                        <template class="speakers">
+                            <ul>
+                                <li>Speaker 1: </li>
+                                <li>Speaker 2: </li>
+                            </ul>
+                        </template>
+                        <template class="optional_hymn">
+                            <div class="input_element">
+                                <label for="specialHymn">Special Hymn</label>
+                                <select>
+                                    <option>#1</option>
+                                    <option>#2</option>
+                                    <option>#3</option>
+                                </select>
+                            </div>
+                        </template>
+                        <template class="speakers2">
+                            <ul>
+                                <li>Speaker 1: </li>
+                                <li>Speaker 2: </li>
+                            </ul>
+                        </template>
+                    </div>
+
+                    <div class="input_element">
+                        <label for="finalHymn">Final Hymn</label>
+                        <select>
+                            <option>#1</option>
+                            <option>#2</option>
+                            <option>#3</option>
+                        </select>
+                    </div>
+                    <div class="input_element">
+                        <label for="finalPrayer">Final Prayer</label>
+                        <input id="finalPrayer" type="text">
+                    </div>
+                    <hr />
+
+                    <div class="closingMeeting">
+                        <template class="more_announcements">
+                            <ul>
+                                <li>Announcement1:</li>
+                            </ul>
+                        </template>
+                    </div>
+
+                    <div class="save_buttons">
+                        <button>Request Save permission</button>
+                        <button>Save</button>
+                        <button>Revert changes</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <hr />
+        <span class="text-creator">Created by: Samir Rodriguez</span>
+        <br />
+        <a href="https://github.com/webprogramming260/simon-html">GitHub</a>
+    </footer>
+</body>
+
+</html>
