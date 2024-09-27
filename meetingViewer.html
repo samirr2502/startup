@@ -1,97 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Tell browsers not to scale the viewport automatically -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://kit.fontawesome.com/ce71fe28ca.js" crossorigin="anonymous"></script>
-    <title>Meetings Planner</title>
-    <link rel="icon" href="" />
-  </head>
-  <body>
-    <!-- Use header, main, and footer elements to give semantic structure -->
-    <header>
-      <h1>Meetigns Planner<sup>&reg;</sup></h1>
-      <div class="user_info">
-        <ul>
-          <li>UserName</li>
-          <li><a href="index.html">Log out</a></li> <!--This will be changed eventually-->
-        </ul>
-      </div>
-      <nav>
-        <menu>
-          <li><a href="home.html">Home</a></li>
-          <li><a class="active_nav_page" href="meetingViewer.html">Meeting Viewer</a></li>
-          <li><a href="meetingPlanner.html">Meeting Planner</a></li>
-          <li><a href="management.html">Management</a></li>
-        </menu>
-      </nav>
-      <hr />
-    </header>
-    <main>
-      <h2>Welcome, <span>[%user]</span></h2>
-      <i class='fas fa-stream' style='font-size:24px'></i>
-      <h2>Viewing meeting</h2>
-      <div id="api_phrase_div">
-        <p>This will have a cool phrase coming from an API</p>
-      </div>
-      <section class="meeting_view_box">
-        <div class="meeting_heading">
-            <p>Date: <span>Meeting date</span></p>
-            <p>Presides: </p>
-            <p>Conducts: </p>
-            <p>Piano:</p>
-            <p>Music: </p>
-        </div>
-        <div class="meeting_intro">
-            <p>Initial Hymn:</p>
-            <p>Initial Prayer:</p>
-            <div class="announcements">
-                <p>Announcements:</p>
-                <template>
-                    <ul>
-                        <li>Announcement 1: </li>
-                    </ul>
-                </template>
-            </div>
-            <p>Sacrement Hymn</p>
-            <div class="talks">
-                <p>Talks:</p>
-                <template class="speakers">
-                    <ul>
-                        <li>Speaker 1: </li>
-                        <li>Speaker 2: </li>
-                    </ul>
-                </template>
-                <template class="optional_hymn">
-                    <p>Hymn: </p>
-                </template>
-                <template class="speakers2">
-                    <ul>
-                        <li>Speaker 1: </li>
-                        <li>Speaker 2: </li>
-                    </ul>
-                </template>
-            </div>
-        
-            <p>Final Hymn:</p>
-            <p>Final Prayer</p>
-        </div>
-        <div class="closingMeeting">
-        <template class="more_announcements">
-            <ul>
-                <li>Announcement1:</li>
-            </ul>
-        </template>
-        </div>
-    </section>
-    </main>
 
-    <footer>
-      <hr />
-      <span class="text-creator">Created by: Samir Rodriguez</span>
-      <br />
-      <a href="https://github.com/webprogramming260/simon-html">GitHub</a>
-    </footer>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <!-- Tell browsers not to scale the viewport automatically -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/ce71fe28ca.js" crossorigin="anonymous"></script>
+  <title>Meetings Planner</title>
+  <link rel="icon" href="" />
+</head>
+
+<body>
+  <!-- Use header, main, and footer elements to give semantic structure -->
+  <header>
+    <h1>Meetigns Planner<sup>&reg;</sup></h1>
+    <div class="user_info">
+      <ul>
+        <li>UserName</li>
+        <li><a href="index.html">Log out</a></li> <!--This will be changed eventually-->
+      </ul>
+    </div>
+    <nav>
+      <menu>
+        <li><a href="home.html">Home</a></li>
+        <li><a class="active_nav_page" href="meetingViewer.html">Meeting Viewer</a></li>
+        <li><a href="meetingPlanner.html">Meeting Planner</a></li>
+        <li><a href="management.html">Management</a></li>
+      </menu>
+    </nav>
+    <hr />
+  </header>
+  <main>
+    <h2>Welcome, <span>[%user]</span></h2>
+    <i class='fas fa-stream' style='font-size:24px'></i>
+    <h2>Viewing meeting</h2>
+    <div id="api_phrase_div">
+      <p>This will have a cool phrase coming from an API</p>
+    </div>
+    <section class="meeting_view_box">
+      <div class="meeting_heading">
+        <p>Date: <span>Meeting date</span></p>
+        <p>Presides: </p>
+        <p>Conducts: </p>
+        <p>Piano:</p>
+        <p>Music: </p>
+      </div>
+      <div class="meeting_intro">
+        <p>Initial Hymn:</p>
+        <p>Initial Prayer:</p>
+        <div class="announcements">
+          <p>Announcements:</p>
+          <template>
+            <ul>
+              <li>Announcement 1: </li>
+            </ul>
+          </template>
+        </div>
+        <p>Sacrement Hymn</p>
+        <div class="talks">
+          <p>Talks:</p>
+          <template class="speakers">
+            <ul>
+              <li>Speaker 1: </li>
+              <li>Speaker 2: </li>
+            </ul>
+          </template>
+          <template class="optional_hymn">
+            <p>Hymn: </p>
+          </template>
+          <template class="speakers2">
+            <ul>
+              <li>Speaker 1: </li>
+              <li>Speaker 2: </li>
+            </ul>
+          </template>
+        </div>
+
+        <p>Final Hymn:</p>
+        <p>Final Prayer</p>
+      </div>
+      <div class="closingMeeting">
+        <template class="more_announcements">
+          <ul>
+            <li>Announcement1:</li>
+          </ul>
+        </template>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <hr />
+    <span class="text-creator">Created by: Samir Rodriguez</span>
+    <br />
+    <a href="https://github.com/webprogramming260/simon-html">GitHub</a>
+  </footer>
+</body>
+
 </html>

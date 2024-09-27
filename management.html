@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Tell browsers not to scale the viewport automatically -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://kit.fontawesome.com/ce71fe28ca.js" crossorigin="anonymous"></script>
-    <title>Meetings Planner</title>
-    <link rel="icon" href="" />
-  </head>
-  <body>
-    <!-- Use header, main, and footer elements to give semantic structure -->
-    <header>
-      <h1>Meetigns Planner<sup>&reg;</sup></h1>
-      <div class="user_info">
-        <ul>
-          <li>UserName</li>
-          <li><a href="index.html">Log out</a></li> <!--This will be changed eventually-->
-        </ul>
-      </div>
-      <nav>
-        <menu>
-          <li><a class="active_nav_page" href="home.html">Home</a></li>
-          <li><a href="meetingViewer.html">Meeting Viewer</a></li>
-          <li><a href="meetingPlanner.html">Meeting Planner</a></li>
-          <li><a href="management.html">Management</a></li>
-        </menu>
-      </nav>
-      <hr />
-    </header>
-    <main>
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- Tell browsers not to scale the viewport automatically -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/ce71fe28ca.js" crossorigin="anonymous"></script>
+  <title>Meetings Planner</title>
+  <link rel="icon" href="" />
+</head>
+
+<body>
+  <!-- Use header, main, and footer elements to give semantic structure -->
+  <header>
+    <h1>Meetigns Planner<sup>&reg;</sup></h1>
+    <div class="user_info">
+      <ul>
+        <li>UserName</li>
+        <li><a href="index.html">Log out</a></li> <!--This will be changed eventually-->
+      </ul>
+    </div>
+    <nav>
+      <menu>
+        <li><a class="active_nav_page" href="home.html">Home</a></li>
+        <li><a href="meetingViewer.html">Meeting Viewer</a></li>
+        <li><a href="meetingPlanner.html">Meeting Planner</a></li>
+        <li><a href="management.html">Management</a></li>
+      </menu>
+    </nav>
+    <hr />
+  </header>
+  <main>
     <section class="top">
       <h2>Welcome, <span>[%user]</span></h2>
       <i class='fas fa-tools' style='font-size:24px'></i>
@@ -37,35 +39,36 @@
         <p>This will have a cool phrase coming from an API</p>
       </div>
     </section>
-      <section class="bottom">
-        <button>Add User</button>
-        <div class="users_table">
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>UserName/Email</th>
-                    <th>Date requested</th>
-                    <th>Approved</th>
-                    <th>Edit</th>
-                </tr>
-                <tr>
-                    <td>Samir</td>
-                    <td>samirr14@byu.edu</td>
-                    <td>09/27/2024</td>
-                    <td><span>yes</span><input type="checkbox" /></td>
-                    <td><button><span>Save/</span>edit</button></td>
-                    
-                </tr>
-            </table>
-        </div>
-        </section>
-    </main>
+    <section class="bottom">
+      <button>Add User</button>
+      <div class="users_table">
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>UserName/Email</th>
+            <th>Date requested</th>
+            <th>Approved</th>
+            <th>Edit</th>
+          </tr>
+          <tr>
+            <td>Samir</td>
+            <td>samirr14@byu.edu</td>
+            <td>09/27/2024</td>
+            <td><span>yes</span><input type="checkbox" /></td>
+            <td><button><span>Save/</span>edit</button></td>
 
-    <footer>
-      <hr />
-      <span class="text-creator">Created by: Samir Rodriguez</span>
-      <br />
-      <a href="https://github.com/webprogramming260/simon-html">GitHub</a>
-    </footer>
-  </body>
+          </tr>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <hr />
+    <span class="text-creator">Created by: Samir Rodriguez</span>
+    <br />
+    <a href="https://github.com/webprogramming260/simon-html">GitHub</a>
+  </footer>
+</body>
+
 </html>
