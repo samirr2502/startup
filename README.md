@@ -22,7 +22,7 @@ As a counselor to a ward and also a member I have been always intrigued by why a
 
 ### Technologies 
 
-**HTML** - Uses correct HTML structure for application. Around 8 HTML Pages. Log in/Create user/ New user landing (waiting for approval)/ User home/ Meetings (View) / Meetings Planner/ Members (Users) View/Management/ Ward Management
+**HTML** - Uses correct HTML structure for application. Around 7 HTML Pages. Log in/Create user/ New user landing (waiting for approval)/ User home/ Meetings (View) / Meetings Planner/ Management
 
 **CSS** - Web Responsive.. Specially nice on Phones. Colors: Use Color Palette website to pick a nice one with good contrasts. A lot of grid-layout usage
 
