@@ -23,8 +23,15 @@ As a counselor to a ward and also a member I have been always intrigued by why a
 ### Technologies 
 
 **HTML** - Uses correct HTML structure for application. Around 7 HTML Pages. Log in/Create user/ New user landing (waiting for approval)/ User home/ Meetings (View) / Meetings Planner/ Management
+***Delivered:***
+    7 HTML pages:  Log in/Create user/ New user landing (waiting for approval)/ User home/ Meetings (View) / Meetings Planner/ Management
+    Can switch properly between pages.
+    All elements are well organized into divs
 
 **CSS** - Web Responsive.. Specially nice on Phones. Colors: Use Color Palette website to pick a nice one with good contrasts. A lot of grid-layout usage
+***Delivered:*** 
+    Used Bootstrap color palette, buttons, image carousel, form inputs, tables and more to create a nice layout. 
+    Used css file to provide other nice layout for the header nav bar, and major columns on pages.
 
 **JavaScript** - Use it to give some, but not much interaction. Log ins, dropdown menus, Loading snippets.
 
