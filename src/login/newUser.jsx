@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function NewUser() {
+export function NewUser() {
   return (
  <main>
     <form className="px-4 py-3">

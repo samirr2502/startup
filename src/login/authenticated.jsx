@@ -1,8 +1,19 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export default function Auth() {
+export function Auth(props) {
+  const navigate = useNavigate();
+
+  function logout() {
+    localStorage.removeItem('userName');
+    props.onLogout();
+  }
+
   return (
     <main className="bd-example col-md-1">
+      <a variant='secondary' onClick={() => logout()}>
+        Logout
+      </a>
          <div id="api_phrase_div">
       <p>This will have a cool phrase coming from an API</p>
     </div>

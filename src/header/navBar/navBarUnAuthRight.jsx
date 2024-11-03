@@ -5,13 +5,19 @@ export function NavBarUnAuthRight() {
   return (
     <>
       <div className="list_nav col-md-3 text-end">
-        <NavLink className="btn btn-outline-primary" to='/home' role="button">
+        <NavLink className="btn btn-outline" to='/' role="button">
           Log in
         </NavLink>
-        <a className="btn btn-primary" href="createUser.html" role="button" >
-          Sign-up
-        </a>
-      </div>
+        {authState === AuthState.Authenticated && (
+
+        <NavLink className="btn btn-outline" to='/' role="button">
+          Home
+        </NavLink>
+        )}
+        <NavLink className="btn btn-outline" to='/about'>
+        About
+        </NavLink>
+      </div> 
 {/*Small screen*/}
 <div class="dropdown_nav col-text-end">
 
@@ -22,8 +28,15 @@ export function NavBarUnAuthRight() {
         </svg>
       </button>
       <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-        <li><a className="dropdown-item active" href="index.html">Log in</a></li>
-        <li><a className="dropdown-item" href="createUser.html">Sign-up</a></li>
+        <li><NavLink className="dropdown-item" to="/">
+        Log in
+        </NavLink></li>
+        <li><NavLink className="dropdown-item" to='/'>
+          Home
+        </NavLink></li>
+        <li><NavLink className="dropdown-item" to="/about">
+        About
+        </NavLink></li>
       </ul>
       </div>
     </>

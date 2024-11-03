@@ -1,28 +1,43 @@
 import React from 'react';
-import Auth from './authenticated';
+import { Auth } from './authenticated';
 import { UnAuth } from './unauthenticated';
+import { AuthState } from './authState';
 
-import NewUser from './newUser';
+import { NewUser } from './newUser';
 
-export function Login() {
+
+export function Login(props) {
+
   return (
     <main className="bd-example col-md-9">
     <section className="title">
-      <h1>Meeting's Planner</h1>
+      <h1>Meeting's Planner  </h1>
     </section>
     
     <section className="content ">
-    <div className="content_left">
-        <Auth />  
-    </div>
 
+    {props.authState === AuthState.Authenticated && (
     <div className="content_left">
-        <UnAuth />  
+        <Auth
+        userName={props.userName} 
+        onLogout={() => 
+              props.onAuthChange(props.userName, AuthState.Unauthenticated)}/>  
     </div>
+    )}
 
+    {props.authState === AuthState.Unauthenticated && (
     <div className="content_left">
+        <UnAuth 
+        userName={props.userName} 
+        onLogin={(loginUserName) => {
+          props.onAuthChange(loginUserName, AuthState.Authenticated);
+        }}/>  
+    </div>
+    )}
+
+    {/* <div className="content_left">
         <NewUser />  
-    </div>
+    </div> */}
 
 
     <div className="content_right" >
