@@ -11,10 +11,21 @@ import { AuthState } from './login/authState';
 import './app.css';
 
 export default function App() {
+  const [usersList, setUsersList] = React.useState(() => {
+    const savedUsers = localStorage.getItem('usersList');
+    return savedUsers ? JSON.parse(savedUsers) : [];
+  })
+  React.useEffect(() => {
+    localStorage.setItem('usersList', JSON.stringify(usersList));
+  }, [usersList]);
+
+  const [currentUser, setCurrentUser] = React.useState('')
+  const currAuthState_2 = currentUser.authenticated ? AuthState.Authenticated : AuthState.Unauthenticated
+
   const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
   const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
   const [authState, setAuthState] = React.useState(currentAuthState);
-  
+
 
   return (
     <BrowserRouter>
@@ -27,38 +38,42 @@ export default function App() {
           <NavBarUnAuthCenter />
 
           <div className="list_nav col-md-3 text-end">
-          {authState === AuthState.Unauthenticated && (
+            {authState === AuthState.Unauthenticated && (
 
-            <NavLink className="btn btn-outline" to='/' role="button">
-              Log in
-            </NavLink>
-          )}
+              <NavLink className="btn btn-outline" to='/' role="button">
+                Log in
+              </NavLink>
+            )}
             {authState === AuthState.Authenticated && (
               <>
-              <NavLink className="btn btn-outline" to='/' role="button">
-                Home
-              </NavLink>
-              <NavLink className="btn btn-outline" to='/checkInHome' role="button">
-                CheckIn
-              </NavLink>
+                <NavLink className="btn btn-outline" to='/' role="button">
+                  Home
+                </NavLink>
+                <NavLink className="btn btn-outline" to='/checkInHome' role="button">
+                  CheckIn
+                </NavLink>
               </>
-            )} 
+            )}
             <NavLink className="btn btn-outline" to='/about'>
               About
             </NavLink>
           </div>
         </header>
         <>
-        <Routes>
+          <Routes>
             <Route path='/' element={
               <Login userName={userName}
               authState={authState}
-                onAuthChange={(userName, authState) => {
-                  setAuthState(authState);
-                  setUserName(userName);
-                }}
-              />} 
-                />
+              onAuthChange={(userName, authState) => {
+                setAuthState(authState);
+                setUserName(userName);}}
+              usersList={usersList}
+                  currentUser = {currentUser}
+                  setCurrentUser ={setCurrentUser}
+                  setUsersList = {setUsersList}
+              />}
+            />
+            
             <Route path='/checkInHome' element={<CheckInHome />} exact />
             <Route path='/about' element={<About />} exact />
             <Route path="*" element={<NotFound />} exact />

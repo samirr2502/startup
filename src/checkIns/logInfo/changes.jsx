@@ -1,9 +1,13 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 
 export function Changes(props) {
   const userName = localStorage.getItem('userName')
   const changes = props.props.changes
+  const clearChanges = ()=>{
+    props.props.handleChangesList(() => [])  
 
+  }
   const changesRender = changes.map((change, index) => {
     return (
       <tr key={index}>
@@ -45,8 +49,11 @@ export function Changes(props) {
   return (
 
     <div className="log_heading">
-      <h4>Changes log</h4>
+      <h5>Changes log</h5>
       <div className="table-responsive small">
+      <Button variant='danger' onClick={() => clearChanges()} >
+          Clear
+        </Button>
         <Table />
       </div>
     </div>

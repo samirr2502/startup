@@ -18,11 +18,12 @@ export function Auth(props) {
 
   return (
     <>
+    
       <section className="content">
         <div className="content_left">
           <form className="px-4 py-3">
             <div className="mb-1">
-
+              <h3>Welcome {userName}</h3>
               <a className="btn btn-primary" role="button"
                 onClick={() => navigate('/checkInHome')}>
                 Check In

@@ -23,7 +23,7 @@ export function UsersLogged() {
 )}
   return (
     <div className="log_heading">
-      <h4>Users Logged</h4>
+      <h5>Users Logged</h5>
       <div className="table-responsive small">
         <Table />
       </div>

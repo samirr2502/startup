@@ -14,15 +14,16 @@ React.useEffect(() => {
   return (
     <main className="bd-example col-md-9">
       <section className="title">
+        <h1>Check in and View Log</h1>
       </section>
 
       <section className="content">
-        <div className="content_left">
+        <div className="content_left checkIn">
          <CheckIn changes={changesList} handleChangesList={setChangesList}/>
         </div>
 
-        <div className="content_right">
-         <LogInfo changes={changesList}/>
+        <div className="content_right logInfo">
+         <LogInfo changes={changesList} handleChangesList={setChangesList}/>
         </div>
 
       </section >

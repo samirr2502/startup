@@ -3,6 +3,7 @@ export function About() {
     return (
             <main className="bd-example col-md-9">
                 <section className="title">
+                    <h1>About Check In Tools</h1>
                 </section>
 
                 <section className="content">

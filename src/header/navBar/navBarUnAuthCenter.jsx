@@ -2,7 +2,7 @@ import React from 'react';
 export function NavBarUnAuthCenter() {
   return (
     <>
-    <div>Check in Tool</div>
+    <div className="nav_bar_title">Check in Tool</div>
       {/* <ul className="nav list_nav col-8 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a href="#" className="nav-link px-2 link-secondary">Login</a></li>
 

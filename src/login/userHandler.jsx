@@ -13,7 +13,7 @@ export function UserHandler(props) {
         }
     })
   }
-  getUser('samir')
+  //getUser('samir')
   
   return (
 <></>

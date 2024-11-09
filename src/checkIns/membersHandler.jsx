@@ -106,13 +106,11 @@ export default function MembersHandler(props) {
 
   const AddButtons = () => {
     return (
-      <div className="save_buttons d-flex flex-wrap">
-        <input required type="text" id="name" className="inputTextName" autoComplete="true"
+      <div className="save_buttons d-flex flex-wrap add_buttons">
+        <input required type="text" id="name" placeholder="memberName"className="inputTextName" autoComplete="true"
         />
-        <a className="btn btn-success" onClick={(e) => addMemberNew(e)} role="button">
-          Add Member
-        </a>
-        <p id="errorMessage"></p>
+        <a className="add_member btn btn-success" onClick={(e) => addMemberNew(e)} role="button">
++        </a>
       </div>
     );
   }
@@ -132,9 +130,11 @@ export default function MembersHandler(props) {
     )
   }
   return (
-    <>
+    <>      
+    <AddButtons />
+    <p id="errorMessage"></p>
+
       <Table />
-      <AddButtons />
     </>
   );
 
