@@ -55,3 +55,26 @@ Editing meeting.
 **DB/Login** - Store users, choices, and votes in database. Register and login users. Credentials securely stored in database. Can't vote unless authenticated.
 
 **WebSocket** - When someone's changing a meeting, every leader in the page can see what they have changed and add their own changes.
+
+
+### Delivered:
+
+**HTML**
+***Delivered:***
+    7 HTML pages:  Log in/Create user/ New user landing (waiting for approval)/ User home/ Meetings (View) / Meetings Planner/ Management
+    Can switch properly between pages.
+    All elements are well organized into divs
+
+**CSS** 
+***Delivered:*** 
+    Used Bootstrap color palette, buttons, image carousel, form inputs, tables and more to create a nice layout. 
+    Used css file to provide other nice layout for the header nav bar, and major columns on pages.
+
+**JavaScript**
+***Delivered:***
+Log in interaction and show error messages.
+
+**React** 
+***Delivered:***
+
+Created React App. Added members and users fucntionality as well as validating users. Also gave template for what the session log will look like after adding the services and websockets
