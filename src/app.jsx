@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { About } from './about/about';
-import { Home } from './home/home';
+import { CheckInHome } from './checkIns/checkInHome';
 import { NavBarUnAuthCenter } from './header/navBar/navBarUnAuthCenter'
 import { Footer } from './footer'
 import { AuthState } from './login/authState';
@@ -14,13 +14,14 @@ export default function App() {
   const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
   const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
   const [authState, setAuthState] = React.useState(currentAuthState);
+  
 
   return (
     <BrowserRouter>
       <div className='body'>
         <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-evenly border-bottom">
           <div className="d-flex align-items-center col-md-3 mb-md-0 ">
-            <img src="media/images/logo_icon.png" width="50px" />
+            <img src="images/logo_icon.png" width="50px" />
           </div>
 
           <NavBarUnAuthCenter />
@@ -33,17 +34,22 @@ export default function App() {
             </NavLink>
           )}
             {authState === AuthState.Authenticated && (
+              <>
               <NavLink className="btn btn-outline" to='/' role="button">
                 Home
               </NavLink>
+              <NavLink className="btn btn-outline" to='/checkInHome' role="button">
+                CheckIn
+              </NavLink>
+              </>
             )} 
             <NavLink className="btn btn-outline" to='/about'>
               About
             </NavLink>
           </div>
         </header>
-        <main>
-          <Routes>
+        <>
+        <Routes>
             <Route path='/' element={
               <Login userName={userName}
               authState={authState}
@@ -53,11 +59,11 @@ export default function App() {
                 }}
               />} 
                 />
-            {/* <Route path='/home' element={<Login userName="user"  authState={currentAuthState} />} exact /> */}
+            <Route path='/checkInHome' element={<CheckInHome />} exact />
             <Route path='/about' element={<About />} exact />
             <Route path="*" element={<NotFound />} exact />
           </Routes>
-        </main>
+        </>
 
         <Footer />
 

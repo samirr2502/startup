@@ -1,0 +1,9 @@
+.removeButton{
+    opacity: 0.2;
+    margin-right: 0 2px;
+
+    float: right;
+}
+.removeButton:hover{
+    opacity: 1;
+}
