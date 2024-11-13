@@ -15,6 +15,16 @@ export function Auth(props) {
     props.onLogout();
     updateChanges("Logged Out")
   }
+  const [quote, setQuote] = React.useState('Loading...');
+
+  React.useEffect(() => {
+    fetch('https://techy-api.vercel.app/api/json')
+      .then((response) => response.json())
+      .then((data) => {
+        setQuote(data.message);
+      })
+      .catch();
+  }, []);
 
   return (
     <>
@@ -38,7 +48,8 @@ export function Auth(props) {
             </div>
           </form>
           <div id="api_phrase_div">
-            <p>This will have a cool phrase coming from an API</p>
+            <p>Tech Savy phrase:</p>
+            <p className='quote'>{quote}</p>
           </div>
 
         </div>

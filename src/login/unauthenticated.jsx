@@ -4,6 +4,8 @@ import './login.css'
 export function UnAuth(props) {
   const [userName, setUserName] = React.useState(props.userName);
   const [password, setPassword] = React.useState('');
+  const [displayError, setDisplayError] = React.useState(null);
+
   //const [displayError, setDisplayError] = React.useState(null);
   const updateChanges= (text)=>{
     props.handleChangesList((prevHistory) => [...prevHistory,
@@ -22,7 +24,7 @@ export function UnAuth(props) {
           }
       })
     }
-
+    
   async function loginUser() {
     const errorMessage = document.getElementById('logInErrorMessage')
 
@@ -58,6 +60,31 @@ export function UnAuth(props) {
       errorMessage.textContent = "User Already Exists"
     }
   }
+
+  async function loginUser_service() {
+    loginOrCreate(`/api/auth/login`);
+  }
+
+  async function createUser_service() {
+    loginOrCreate(`/api/auth/create`);
+  }
+  async function loginOrCreate(endpoint) {
+    const response = await fetch(endpoint, {
+      method: 'post',
+      body: JSON.stringify({ email: userName, password: password }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+    if (response?.status === 200) {
+      localStorage.setItem('userName', userName);
+      props.onLogin(userName);
+    } else {
+      const body = await response.json();
+      setDisplayError(`⚠ Error: ${body.msg}`);
+    }
+  }
+
   return (
     <>
     <section className="content">
@@ -76,10 +103,10 @@ export function UnAuth(props) {
         <p id="logInErrorMessage"></p>
 
         <div className="login_buttons d-flex flex-wrap justify-content-sm-between">
-          <Button variant='primary' onClick={() => loginUser()} disabled={!userName || !password}>
+          <Button variant='primary' onClick={() => loginUser_service()} disabled={!userName || !password}>
           Login
         </Button>
-        <Button variant='secondary' onClick={() => createUser()} disabled={!userName || !password}>
+        <Button variant='secondary' onClick={() => createUser_service()} disabled={!userName || !password}>
           Create
         </Button>
         </div>

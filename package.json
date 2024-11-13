@@ -25,6 +25,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
     "rollup": "^4.24.0",
-    "source-map-js": "^1.2.1"
+    "source-map-js": "^1.2.1",
+    "uuid": "^11.0.3",
+    "uuidv4": "^6.2.13"
   }
 }
