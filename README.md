@@ -95,3 +95,12 @@ Log in interaction and show error messages.
 ***Delivered:***
 
 Created React App. Added members and users fucntionality as well as validating users. Also gave template for what the session log will look like after adding the services and websockets
+
+**Service** -
+
+***Delivered***
+Backend service with endpoints for: 
+Log in.
+Saving members info
+API: https://techy-api.vercel.app/api/json
+
