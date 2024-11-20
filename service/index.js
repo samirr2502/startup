@@ -7,7 +7,7 @@ const DB = require('./database.js');
 const authCookieName = 'token';
 
 
-// The scores and users are saved in memory and disappear whenever the service is restarted.
+// The users and members are saved in memory and disappear whenever the service is restarted.
 let users = {};
 let members = [];
 
@@ -68,26 +68,17 @@ apiRouter.delete('/auth/logout', (req, res) => {
   res.clearCookie(authCookieName);
   res.status(204).end();
 });
-apiRouter.get('/members', async (_req, res) => {
-  const members = await DB.getMembers();
-  const membersList = []
 
-    // Assuming each member has an '_id' property as a unique key
-    members.forEach(member => {
-      membersList.push(member);
-    });
 
-  res.send(membersList);
-});
 // 
 apiRouter.post('/member', async (req, res) => {
-  const member = await DB.addMember(req.body.name, req.body.chechIn)
+  const member = await DB.addMember(req.body.name, req.body.checkedIn)
   //const member = updateMember(req.body, members);
   res.send(member);
 });
-apiRouter.delete('/remove', (req, res) => {
+apiRouter.delete('/remove', async (req, res) => {
   console.log(req.body)
-  const members = DB.removeMember(req.body.memberName);
+  const members = await DB.removeMember(req.body.memberName);
   //members= members.filter((_, i) => i !== req.body.i);
   const membersList = []
 
@@ -97,12 +88,18 @@ apiRouter.delete('/remove', (req, res) => {
     });
   res.send(membersList);
 });
+
+// 
+apiRouter.delete('/clear', (req, res) => {
+  DB.removeAllMembers();
+  res.send([]);
+});
 const secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
 
 secureApiRouter.use(async (req, res, next) => {
   const authToken = req.cookies[authCookieName];
-  const user = await DB.getUser(localStorage.getItem('userName'));
+  const user = DB.getUserByToken(authToken);
   if (user) {
     next();
   } else {
@@ -110,12 +107,27 @@ secureApiRouter.use(async (req, res, next) => {
   }
 });
 
-
-// 
-secureApiRouter.delete('/clear', (req, res) => {
-  members = [];
-  res.send();
+secureApiRouter.get('/members', async (_req, res) => {
+  const members = await DB.getMembers();
+  const membersList = []
+    members.forEach(member => {
+      membersList.push(member);
+    });
+  res.send(membersList);
 });
+
+secureApiRouter.post('/member/checkIn', async (req, res) => {
+  const member = await DB.getMember(req.body.memberName);
+  let member_new = null;
+  if(member) {
+    await DB.removeMember(req.body.memberName);
+    member_new = await DB.addMember(req.body.memberName, req.body.checkedIn);
+  }
+  
+  res.send(member_new);
+});
+
+
 
 // 
 app.use((_req, res) => {
@@ -125,7 +137,7 @@ app.use((_req, res) => {
 // setAuthCookie in the HTTP response
 function setAuthCookie(res, authToken) {
   res.cookie(authCookieName, authToken, {
-    secure: true,
+    secure: false,
     httpOnly: true,
     sameSite: 'strict',
   });

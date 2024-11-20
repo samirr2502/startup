@@ -40,16 +40,16 @@ async function createUser(email, password) {
   return user;
 }
 
-async function addScore(score) {
-  //return scoreCollection.insertOne(score);
-}
 function getMembers(){
   return membersCollection.find().toArray();
 }
-async function addMember(name, checkIn){
+async function getMember(name, checkedIn){
+  return membersCollection.findOne({name:name});
+}
+async function addMember(name, checkedIn){
   const member = {
     name: name,
-    checkIn: checkIn
+    checkedIn: checkedIn
   }
   return membersCollection.insertOne(member);
 }
@@ -58,15 +58,9 @@ async function removeMember(name){
   membersCollection.deleteOne(member);
   return membersCollection.find().toArray();
 }
-
-function getHighScores() {
-  // const query = { score: { $gt: 0, $lt: 900 } };
-  // const options = {
-  //   sort: { score: -1 },
-  //   limit: 10,
-  // };
-  // const cursor = scoreCollection.find(query, options);
-  // return cursor.toArray();
+async function removeAllMembers(){
+  membersCollection.drop;
+  return new Array();
 }
 
 module.exports = {
@@ -74,8 +68,8 @@ module.exports = {
   getUserByToken,
   createUser,
   getMembers,
+  getMember,
   addMember,
   removeMember,
-  addScore,
-  getHighScores,
+  removeAllMembers,
 };

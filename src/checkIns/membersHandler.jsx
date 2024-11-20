@@ -8,16 +8,14 @@ export default function MembersHandler(props) {
   const [members_, setMembers_] = React.useState([]);
 
   React.useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('/api/members');
-      const members = await response.json();
-      console.log(members);
-      setMembers_(members);
-    }
-    fetchData();
+    fetchMembers();
   }, []);
   
-
+  async function fetchMembers() {
+    const response = await fetch('/api/members');
+    const members = await response.json();
+    setMembers_(members);
+  }
   //Savechanges
   const updateChanges= (text)=>{
     props.props.handleChangesList((prevHistory) => [...prevHistory,
@@ -26,14 +24,7 @@ export default function MembersHandler(props) {
     }
 
   //Update Check Ins
-  const updateCheckedIn = async (index) => {
-    
-    setMembers_((prevList) =>
-      prevList.map((member, i) =>
-        i === index ? { ...member, checkedIn: !member.checkedIn } : member
-      )
-    );
-    const member= await getMember(index)
+  const updateCheckedIn = async (member, index) => {
     let text=" Checked member: " + member.name
 
     if (!member.checkedIn){
@@ -41,19 +32,26 @@ export default function MembersHandler(props) {
     } else {
       text += " Out"
     }
+    // const updatedMember = {name: member.name, checkedIn: !member.checkedIn}
+    checkInMember(member)
     updateChanges(text)
   }
-  const getMember = (index) => {
-    return new Promise((resolve, reject) => {
-        if (index >= 0 && index < members_.length) {
-            const member = members_[index];
-            setSelectedMember(member);
-            resolve(member);
-        } else {
-            reject("Invalid member index");
-        }
+  async function checkInMember(member) {
+    
+    const response = await fetch('/api/member/checkIn', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({memberName:member.name, checkedIn: !member.checkedIn}),
     });
-};
+    if (response?.status === 200) {
+      await fetchMembers();
+
+    } else {
+      const body = await response.json();
+      setDisplayError(`⚠ Error: `);
+    }
+  }
+
 
   //add a new member
   const addMemberNew = async (e) => {
@@ -73,23 +71,23 @@ export default function MembersHandler(props) {
       return
     }
     //Set member
-    console.log(members_)
-    savedMembers(value)
-    console.log(members_)
+    saveMembers(value)
     errorMessage.textContent = ""
+    await fetchMembers()
+
     let text = "Added member: " + value
     updateChanges(text)
   }
-  async function savedMembers(value) {
+  async function saveMembers(value) {
     const newMember = { name:value, checkedIn: false };
-    console.log(newMember)
-    await fetch('/api/member', {
+    const response = await fetch('/api/member', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(newMember),
     });
     if (response?.status === 200) {
-      
+      await fetchMembers();
+
     } else {
       const body = await response.json();
       setDisplayError(`⚠ Error: `);
@@ -105,13 +103,13 @@ export default function MembersHandler(props) {
       body: JSON.stringify({memberName:member.name}),
     });
     if (response?.status === 200) {
-      
+      await fetchMembers();
+
     } else {
       const body = await response.json();
       setDisplayError(`⚠ Error: `);
     }
-    //console.log(members_)
-    //const member_=  await getMember(index)
+
     let text = "Removed member: " + member.name
     updateChanges(text)
 
@@ -125,7 +123,7 @@ export default function MembersHandler(props) {
           {member.name}</td>
         <td> <input type="checkbox"
           checked={member.checkedIn}
-          onChange={() => updateCheckedIn(index)} />
+          onChange={() => updateCheckedIn(member, index)} />
 
           <button className="removeButton" onClick={() => removeMember(member, index)} >x</button>
 
