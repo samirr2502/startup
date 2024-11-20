@@ -68,7 +68,23 @@ apiRouter.delete('/auth/logout', (req, res) => {
   res.clearCookie(authCookieName);
   res.status(204).end();
 });
+apiRouter.get('/members', async (_req, res) => {
+  const members = await DB.getMembers();
+  const membersList = []
 
+    // Assuming each member has an '_id' property as a unique key
+    members.forEach(member => {
+      membersList.push(member);
+    });
+
+  res.send(membersList);
+});
+// 
+apiRouter.post('/member', async (req, res) => {
+  const member = await DB.addMember(req.body.name, req.body.chechIn)
+  //const member = updateMember(req.body, members);
+  res.send(member);
+});
 const secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
 
@@ -82,15 +98,6 @@ secureApiRouter.use(async (req, res, next) => {
   }
 });
 
-secureApiRouter.get('/members', (_req, res) => {
-  res.send(DB.getMembers());
-});
-
-// 
-secureApiRouter.post('/member', (req, res) => {
-  members = updateMember(req.body, members);
-  res.send(members);
-});
 
 secureApiRouter.delete('/remove', (req, res) => {
   console.log(req.body)

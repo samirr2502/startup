@@ -10,8 +10,9 @@ export default function MembersHandler(props) {
   React.useEffect(() => {
     async function fetchData() {
       const response = await fetch('/api/members');
-      const members_ = await response.json();
-      setMembers_(members_);
+      const members = await response.json();
+      console.log(members);
+      setMembers_(members);
     }
     fetchData();
   }, []);

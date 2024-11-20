@@ -46,6 +46,13 @@ async function addScore(score) {
 function getMembers(){
   return membersCollection.find().toArray();
 }
+async function addMember(name, checkIn){
+  const member = {
+    name: name,
+    checkIn: checkIn
+  }
+  return membersCollection.insertOne(member);
+}
 
 function getHighScores() {
   // const query = { score: { $gt: 0, $lt: 900 } };
@@ -62,6 +69,7 @@ module.exports = {
   getUserByToken,
   createUser,
   getMembers,
+  addMember,
   addScore,
   getHighScores,
 };
