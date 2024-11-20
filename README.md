@@ -51,6 +51,7 @@ Log in interaction and show error messages.
 
 **React** - Specially for memmbers management and meeting planner. This will allow me to create an interactive web application
 
+
 ***Delivered:***
 
 Created React App. Added members and users fucntionality as well as validating users. Also gave template for what the session log will look like after adding the services and websockets
@@ -59,8 +60,14 @@ Created React App. Added members and users fucntionality as well as validating u
 Log in.
 Editing meeting.
 (Possibly an Import API to add a bunch of users at the same time)
+***Changes***
+Changed to members check in instead of meetings planner
+Log in and adding and checking members in and out
 
-**DB/Login** - Store users, choices, and votes in database. Register and login users. Credentials securely stored in database. Can't vote unless authenticated.
+**DB/Login** - Store users, choices, and votes in database. Register and login users. Credentials securely stored in database. Can't vote unless authenticated. 
+***Changes***
+Changed to members check in instead of meetings planner
+Log in and adding and checking members in and out through data base
 
 **WebSocket** - When someone's changing a meeting, every leader in the page can see what they have changed and add their own changes.
 
@@ -104,3 +111,15 @@ Log in.
 Saving members info
 API: https://techy-api.vercel.app/api/json
 
+
+**DB Login**
+
+***Delivered***
+
+- Connected to Mongo DB with:
+     - db: startup
+     - collection1: user
+     - collection2: member
+ - Saving token in cookies for authentication
+ - Saves login info
+ - Saves members and updates database when member is checked in and out
