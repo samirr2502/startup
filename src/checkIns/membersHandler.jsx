@@ -88,19 +88,30 @@ export default function MembersHandler(props) {
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(newMember),
     });
-    setMembers_([...members_, newMember])
+    if (response?.status === 200) {
+      
+    } else {
+      const body = await response.json();
+      setDisplayError(`⚠ Error: `);
+    }
   }
 
   //RemoveMember
-  const removeMember = async (index) => {
-    setMembers_( (prevList) =>   prevList.filter((_, i) => i !== index));
-    await fetch('/api/remove', {
+  const removeMember = async (member, index) => {
+    //setMembers_( (prevList) =>   prevList.filter((_, i) => i !== index));
+    const response = await fetch('/api/remove', {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({i:index}),
+      body: JSON.stringify({memberName:member.name}),
     });
-    console.log(members_)
-    const member=  await getMember(index)
+    if (response?.status === 200) {
+      
+    } else {
+      const body = await response.json();
+      setDisplayError(`⚠ Error: `);
+    }
+    //console.log(members_)
+    //const member_=  await getMember(index)
     let text = "Removed member: " + member.name
     updateChanges(text)
 
@@ -116,7 +127,7 @@ export default function MembersHandler(props) {
           checked={member.checkedIn}
           onChange={() => updateCheckedIn(index)} />
 
-          <button className="removeButton" onClick={() => removeMember(index)} >x</button>
+          <button className="removeButton" onClick={() => removeMember(member, index)} >x</button>
 
         </td>
       </tr>

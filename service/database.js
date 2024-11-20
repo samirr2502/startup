@@ -53,6 +53,11 @@ async function addMember(name, checkIn){
   }
   return membersCollection.insertOne(member);
 }
+async function removeMember(name){
+  const member = await membersCollection.findOne({name: name})
+  membersCollection.deleteOne(member);
+  return membersCollection.find().toArray();
+}
 
 function getHighScores() {
   // const query = { score: { $gt: 0, $lt: 900 } };
@@ -70,6 +75,7 @@ module.exports = {
   createUser,
   getMembers,
   addMember,
+  removeMember,
   addScore,
   getHighScores,
 };

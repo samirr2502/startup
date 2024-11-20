@@ -85,6 +85,18 @@ apiRouter.post('/member', async (req, res) => {
   //const member = updateMember(req.body, members);
   res.send(member);
 });
+apiRouter.delete('/remove', (req, res) => {
+  console.log(req.body)
+  const members = DB.removeMember(req.body.memberName);
+  //members= members.filter((_, i) => i !== req.body.i);
+  const membersList = []
+
+    // Assuming each member has an '_id' property as a unique key
+    members.forEach(member => {
+      membersList.push(member);
+    });
+  res.send(membersList);
+});
 const secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
 
@@ -99,11 +111,6 @@ secureApiRouter.use(async (req, res, next) => {
 });
 
 
-secureApiRouter.delete('/remove', (req, res) => {
-  console.log(req.body)
-    members= members.filter((_, i) => i !== req.body.i);
-    res.send(members);
-});
 // 
 secureApiRouter.delete('/clear', (req, res) => {
   members = [];
