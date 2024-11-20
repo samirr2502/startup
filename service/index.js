@@ -32,23 +32,26 @@ app.use(`/api`, apiRouter);
 console.log(apiRouter)
 // CreateAuth a new user
 apiRouter.post('/auth/create', async (req, res) => {
-  const user = users[req.body.email];
+  //const user = users[req.body.email];
+  const user = await DB.getUser(req.body.email);
   if (user) {
     res.status(409).send({ msg: 'Existing user' });
   } else {
-    const user = { email: req.body.email, password: req.body.password, token: uuid.v4() };
-    users[user.email] = user;
-
+    //const user = { email: req.body.email, password: req.body.password, token: uuid.v4() };
+    const user = await DB.createUser(req.body.email, req.body.password);
+    // users[user.email] = user;
     res.send({ token: user.token });
   }
 });
 
 // GetAuth login an existing user
 apiRouter.post('/auth/login', async (req, res) => {
-  const user = users[req.body.email];
+  //const user = users[req.body.email];
+  const user = await DB.getUser(req.body.email);
   if (user) {
-    if (req.body.password === user.password) {
+    if (await bcrypt.compare(req.body.password, user.password)) {
       //user.token = uuid.v4();
+      setAuthCookie(res, user.token);
       res.send({ token: user.token });
       return;
     }
@@ -58,31 +61,44 @@ apiRouter.post('/auth/login', async (req, res) => {
 
 // DeleteAuth logout a user
 apiRouter.delete('/auth/logout', (req, res) => {
-  const user = Object.values(users).find((u) => u.token === req.body.token);
-  if (user) {
-    delete user.token;
-  }
+  // const user = Object.values(users).find((u) => u.token === req.body.token);
+  // if (user) {
+  //   delete user.token;
+  // }
+  res.clearCookie(authCookieName);
   res.status(204).end();
 });
 
+const secureApiRouter = express.Router();
+apiRouter.use(secureApiRouter);
 
-apiRouter.get('/members', (_req, res) => {
-  res.send(members);
+secureApiRouter.use(async (req, res, next) => {
+  const authToken = req.cookies[authCookieName];
+  const user = await DB.getUser(localStorage.getItem('userName'));
+  if (user) {
+    next();
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});
+
+secureApiRouter.get('/members', (_req, res) => {
+  res.send(DB.getMembers());
 });
 
 // 
-apiRouter.post('/member', (req, res) => {
+secureApiRouter.post('/member', (req, res) => {
   members = updateMember(req.body, members);
   res.send(members);
 });
 
-apiRouter.delete('/remove', (req, res) => {
+secureApiRouter.delete('/remove', (req, res) => {
   console.log(req.body)
     members= members.filter((_, i) => i !== req.body.i);
     res.send(members);
 });
 // 
-apiRouter.delete('/clear', (req, res) => {
+secureApiRouter.delete('/clear', (req, res) => {
   members = [];
   res.send();
 });
@@ -91,6 +107,15 @@ apiRouter.delete('/clear', (req, res) => {
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
+
+// setAuthCookie in the HTTP response
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
