@@ -59,7 +59,7 @@ async function removeMember(name){
   return membersCollection.find().toArray();
 }
 async function removeAllMembers(){
-  membersCollection.drop;
+  membersCollection.deleteMany({});
   return new Array();
 }
 

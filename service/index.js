@@ -70,30 +70,7 @@ apiRouter.delete('/auth/logout', (req, res) => {
 });
 
 
-// 
-apiRouter.post('/member', async (req, res) => {
-  const member = await DB.addMember(req.body.name, req.body.checkedIn)
-  //const member = updateMember(req.body, members);
-  res.send(member);
-});
-apiRouter.delete('/remove', async (req, res) => {
-  console.log(req.body)
-  const members = await DB.removeMember(req.body.memberName);
-  //members= members.filter((_, i) => i !== req.body.i);
-  const membersList = []
 
-    // Assuming each member has an '_id' property as a unique key
-    members.forEach(member => {
-      membersList.push(member);
-    });
-  res.send(membersList);
-});
-
-// 
-apiRouter.delete('/clear', (req, res) => {
-  DB.removeAllMembers();
-  res.send([]);
-});
 const secureApiRouter = express.Router();
 apiRouter.use(secureApiRouter);
 
@@ -122,9 +99,32 @@ secureApiRouter.post('/member/checkIn', async (req, res) => {
   if(member) {
     await DB.removeMember(req.body.memberName);
     member_new = await DB.addMember(req.body.memberName, req.body.checkedIn);
-  }
-  
+  }  
   res.send(member_new);
+});
+// 
+secureApiRouter.post('/member', async (req, res) => {
+  const member = await DB.addMember(req.body.name, req.body.checkedIn)
+  //const member = updateMember(req.body, members);
+  res.send(member);
+});
+secureApiRouter.delete('/remove', async (req, res) => {
+  console.log(req.body)
+  const members = await DB.removeMember(req.body.memberName);
+  //members= members.filter((_, i) => i !== req.body.i);
+  const membersList = []
+
+    // Assuming each member has an '_id' property as a unique key
+    members.forEach(member => {
+      membersList.push(member);
+    });
+  res.send(membersList);
+});
+
+// 
+secureApiRouter.delete('/clear', (req, res) => {
+  DB.removeAllMembers();
+  res.send([]);
 });
 
 
