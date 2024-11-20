@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const app = express();
 const DB = require('./database.js');
-
 const authCookieName = 'token';
 
 
@@ -12,7 +11,7 @@ let users = {};
 let members = [];
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
-const port = process.argv.length > 2 ? process.argv[2] : 3000;
+const port = process.argv.length > 2 ? process.argv[2] : 4000;
 // JSON body parsing using built-in middleware
 app.use(express.json());
 
@@ -29,7 +28,7 @@ app.set('trust proxy', true);
 const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-console.log(apiRouter)
+//console.log(apiRouter)
 // CreateAuth a new user
 apiRouter.post('/auth/create', async (req, res) => {
   //const user = users[req.body.email];
@@ -50,6 +49,7 @@ apiRouter.post('/auth/login', async (req, res) => {
   const user = await DB.getUser(req.body.email);
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
+    //if (req.body.password == user.password){
       //user.token = uuid.v4();
       setAuthCookie(res, user.token);
       res.send({ token: user.token });
