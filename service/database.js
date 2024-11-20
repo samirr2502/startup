@@ -7,7 +7,8 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 
 const options = {
   tls: true,
-  tlsAllowInvalidCertificates: true,
+  serverSelectionTimeoutMS: 3000,
+  autoSelectFamily: false,
 };
 
 const client = new MongoClient(url,options);
