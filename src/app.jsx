@@ -73,8 +73,8 @@ export default function App() {
                   setUsersList = {setUsersList}
               />}
             />
-            {authState.authenticated &&
-            <Route path='/checkInHome' element={<CheckInHome />} exact />}
+            {authState === AuthState.Authenticated &&
+           (<Route path='/checkInHome' element={<CheckInHome />} exact />)}
             <Route path='/about' element={<About />} exact />
             <Route path="*" element={<NotFound />} exact />
           </Routes>
