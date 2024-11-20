@@ -1,3 +1,5 @@
+dbConfig.json
+
 # dependencies
 node_modules
 /.pnp
@@ -12,4 +14,3 @@ node_modules
 
 npm-debug.log*
 .vscode
-dbConfig.json
