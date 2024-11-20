@@ -100,7 +100,7 @@ export function UnAuth(props) {
           <label htmlFor="password" className="form-label">Password</label>
           <input type="password" className="form-control" id="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <p id="logInErrorMessage"></p>
+        <p id="logInErrorMessage">{displayError}</p>
 
         <div className="login_buttons d-flex flex-wrap justify-content-sm-between">
           <Button variant='primary' onClick={() => loginUser_service()} disabled={!userName || !password}>

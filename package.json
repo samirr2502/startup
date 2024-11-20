@@ -1,7 +1,7 @@
 {
   "name": "startup",
   "version": "1.0.0",
-  "description": "CS 260 Fall 2024 project  This Web Application has the main purpose of creating an online hub for leaders on an LDS Ward to make changes to a sacrament meeting meeting, and for members to view the details on those meeting agenda.",
+  "description": "CS 260 Fall 2024 project  This Web Application has the main purpose of checking members in an outr of events and meetings.",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
