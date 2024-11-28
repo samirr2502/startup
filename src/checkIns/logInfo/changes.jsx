@@ -16,7 +16,7 @@ export function Changes(props) {
     setChanges([...changes, change]);
   }
   const clearChanges = ()=>{
-    props.props.handleChangesList(() => [])
+   setChanges([])
   }
   const changesRender = [...changes].reverse().map((change, index) => {
     return (
