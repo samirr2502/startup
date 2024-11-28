@@ -135,3 +135,4 @@ API: https://techy-api.vercel.app/api/json
 ***Delivered***
 
 Users can add members and update tham and will see a log of the members they have added or edited as well as the other users updates.
+Users can reset the list of changes from their client side.
