@@ -4,13 +4,6 @@ const ChangeType = {
   UpdateMember: 'UpdateMember',
 };
 
-// class ChangesMessage {
-//   constructor(userName, change) {
-//     this.userName = userName;
-//     this.change = change;
-//   }
-// }
-
 class ChangeNotifierClass {
   changes = [];
   handlers = [];
