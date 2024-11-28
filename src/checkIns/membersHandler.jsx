@@ -1,15 +1,13 @@
 import React from "react";
 import './checkIn.css'
-import Button from 'react-bootstrap/Button';
 import {ChangeType, ChangeNotifier } from './changeNotifier';
-
 
 export default function MembersHandler(props) {
   const userName = localStorage.getItem("userName")
-  const [selectedMember, setSelectedMember] = React.useState(null);
   const [members_, setMembers_] = React.useState([]);
   React.useEffect(() => {
     fetchMembers();
+    //This makes sure the database updates render back in the other clients side
     // Set up WebSocket connection
     let port = window.location.port;
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
@@ -17,7 +15,7 @@ export default function MembersHandler(props) {
     ws.onmessage = async (event) => {
     await fetchMembers()
   };
-  // Clean up WebSocket on component unmount
+  // Clean up WebSocket 
   return () => {
     ws.close();
   };
@@ -40,6 +38,7 @@ export default function MembersHandler(props) {
 
   //Update Check Ins
   const updateCheckedIn = async (member, index) => {
+    //Get's called by the Button on the page
     let text=" Checked member: " + member.name
 
     if (!member.checkedIn){
@@ -47,15 +46,14 @@ export default function MembersHandler(props) {
     } else {
       text += " Out"
     }
-    // const updatedMember = {name: member.name, checkedIn: !member.checkedIn}
     await checkInMember(member)
     await fetchMembers()
-
     updateChanges(text, ChangeType.UpdateMember)
 
   }
+
   async function checkInMember(member) {
-    
+    //Get's called by updateCheck it to make the fetch request
     const response = await fetch('/api/member/checkIn', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
@@ -112,7 +110,6 @@ export default function MembersHandler(props) {
 
   //RemoveMember
   const removeMember = async (member, index) => {
-    //setMembers_( (prevList) =>   prevList.filter((_, i) => i !== index));
     const response = await fetch('/api/remove', {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
@@ -140,23 +137,23 @@ export default function MembersHandler(props) {
           checked={member.checkedIn}
           onChange={() => updateCheckedIn(member, index)}
           />
-
           <button className="removeButton" onClick={() => removeMember(member, index)} >x</button>
 
         </td>
       </tr>
     );
   });
-  const resetData =  () => {
-     fetch('/api/clear', {
-      method: 'DELETE',
-      headers: { 'content-type': 'application/json' }
-    });
+  // Need to import Button component to use in case need to reset data
+  // const resetData =  () => {
+  //    fetch('/api/clear', {
+  //     method: 'DELETE',
+  //     headers: { 'content-type': 'application/json' }
+  //   });
 
-    setMembers_([])
-    let text = "cleared Data"
-    updateChanges(text)
-  }
+  //   setMembers_([])
+  //   let text = "cleared Data"
+  //   updateChanges(text)
+  // }
 
   const AddButtons = () => {
     return (

@@ -7,7 +7,6 @@ export function LogInfo(props) {
     <div className="meeting_edit_log">
       <UsersLogged />
       <hr/>
-
       <Changes props={props} />
     </div>
   );
