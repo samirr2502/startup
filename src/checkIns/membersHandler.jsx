@@ -1,6 +1,8 @@
 import React from "react";
 import './checkIn.css'
 import Button from 'react-bootstrap/Button';
+import { ChangeNotifier } from './changeNotifier';
+
 
 export default function MembersHandler(props) {
   const userName = localStorage.getItem("userName")
@@ -18,10 +20,12 @@ export default function MembersHandler(props) {
   }
   //Savechanges
   const updateChanges= (text)=>{
-    props.props.handleChangesList((prevHistory) => [...prevHistory,
-      { userName: {userName}, change: text }
-      ])  
-    }
+
+    // props.props.handleChangesList((prevHistory) => [...prevHistory,
+    //   { userName: {userName}, change: text }])
+
+    ChangeNotifier.broadcastChange({userName},text);
+  }
 
   //Update Check Ins
   const updateCheckedIn = async (member, index) => {
@@ -176,7 +180,4 @@ export default function MembersHandler(props) {
       <Table />
     </>
   );
-
-
-
 }

@@ -1,12 +1,22 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-
+import { ChangeNotifier } from '../changeNotifier';
 export function Changes(props) {
   const userName = localStorage.getItem('userName')
-  const changes = props.props.changes
+  const changes_old = props.props.changes
+  const [changes, setChanges] = React.useState([]) 
+  
+  React.useEffect(()=>{
+    ChangeNotifier.addHandler(handleChangesList)
+    return () => {
+      ChangeNotifier.removeHandler(handleChangesList);
+    }
+  })
+  function handleChangesList(change) {
+    setChanges([...changes, change]);
+  }
   const clearChanges = ()=>{
-    props.props.handleChangesList(() => [])  
-
+    props.props.handleChangesList(() => [])
   }
   const changesRender = changes.map((change, index) => {
     return (

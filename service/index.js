@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const DB = require('./database.js');
 const authCookieName = 'token';
+const { peerProxy } = require('./peerProxy.js');
 
 
 // The users and members are saved in memory and disappear whenever the service is restarted.
@@ -143,7 +144,7 @@ function setAuthCookie(res, authToken) {
   });
 }
 
-app.listen(port, () => {
+const httpService = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
@@ -154,3 +155,4 @@ function updateMember(newMember, members) {
   return members
 }
 
+peerProxy(httpService);
