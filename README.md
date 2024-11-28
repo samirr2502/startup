@@ -28,6 +28,7 @@ The meeting planning funcitonality will be potentially added in the future
 
 ***Change***
 1.) Laaders add and check in members and they can see what other users are doing
+
 ### Technologies 
 
 **HTML** - Uses correct HTML structure for application. Around 7 HTML Pages. Log in/Create user/ New user landing (waiting for approval)/ User home/ Meetings (View) / Meetings Planner/ Management
@@ -70,6 +71,8 @@ Changed to members check in instead of meetings planner
 Log in and adding and checking members in and out through data base
 
 **WebSocket** - When someone's changing a meeting, every leader in the page can see what they have changed and add their own changes.
+***Changes***
+When someone is adding or updating a member, the websocket will send notificaitons to everyone abiut the update (It will update on the user that sent it as well) 
 
 
 ### Delivered:
@@ -99,6 +102,7 @@ With multiple Reac components
 Log in interaction and show error messages.
 
 **React** 
+
 ***Delivered:***
 
 Created React App. Added members and users fucntionality as well as validating users. Also gave template for what the session log will look like after adding the services and websockets
@@ -123,3 +127,11 @@ API: https://techy-api.vercel.app/api/json
  - Saving token in cookies for authentication
  - Saves login info
  - Saves members and updates database when member is checked in and out
+
+
+
+**Websocket**
+
+***Delivered***
+
+Users can add members and update tham and will see a log of the members they have added or edited as well as the other users updates.
