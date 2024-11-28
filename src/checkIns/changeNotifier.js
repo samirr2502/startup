@@ -1,8 +1,8 @@
-// const GameEvent = {
-//   System: 'system',
-//   End: 'gameEnd',
-//   Start: 'gameStart',
-// };
+const ChangeType = {
+  System: 'system',
+  NewMember: 'NewMember',
+  UpdateMember: 'UpdateMember',
+};
 
 // class ChangesMessage {
 //   constructor(userName, change) {
@@ -20,10 +20,10 @@ class ChangeNotifierClass {
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
     this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
     this.socket.onopen = (event) => {
-      this.receiveChange({userName:{userName:'System'},change:'connected'});
+      this.receiveChange({userName:{userName:'System'},change:'connected',changeType: ChangeType.System});
     };
     this.socket.onclose = (event) => {
-      this.receiveChange({userName:{userName:'System'},change:'disconnected'});
+      this.receiveChange({userName:{userName:'System'},change:'disconnected',changeType: ChangeType.System});
     };
     this.socket.onmessage = async (msg) => {
       try {
@@ -33,8 +33,9 @@ class ChangeNotifierClass {
     };
   }
 
-  broadcastChange(userName, _change) {
-    const change = {userName:userName,change:_change};
+  broadcastChange(userName, _change,changeType) {
+    const change = {userName:userName, change:_change, changeType:changeType};
+  
     console.log(change)
     this.socket.send(JSON.stringify(change));
   }
@@ -59,4 +60,4 @@ class ChangeNotifierClass {
 }
 
 const ChangeNotifier = new ChangeNotifierClass();
-export {  ChangeNotifier };
+export {  ChangeType, ChangeNotifier };

@@ -1,30 +1,41 @@
 import React from "react";
 import './checkIn.css'
 import Button from 'react-bootstrap/Button';
-import { ChangeNotifier } from './changeNotifier';
+import {ChangeType, ChangeNotifier } from './changeNotifier';
 
 
 export default function MembersHandler(props) {
   const userName = localStorage.getItem("userName")
   const [selectedMember, setSelectedMember] = React.useState(null);
   const [members_, setMembers_] = React.useState([]);
-
   React.useEffect(() => {
     fetchMembers();
+    // Set up WebSocket connection
+    let port = window.location.port;
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    const ws = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
+    ws.onmessage = async (event) => {
+    await fetchMembers()
+  };
+  // Clean up WebSocket on component unmount
+  return () => {
+    ws.close();
+  };
   }, []);
   
   async function fetchMembers() {
-    const response = await fetch('/api/members');
-    const members = await response.json();
-    setMembers_(members);
+    try {
+      const response = await fetch('/api/members');
+      const members = await response.json();
+      setMembers_(members);
+    } catch (error) {
+      console.error('Failed to fetch members:', error);
+    }
   }
+
   //Savechanges
-  const updateChanges= (text)=>{
-
-    // props.props.handleChangesList((prevHistory) => [...prevHistory,
-    //   { userName: {userName}, change: text }])
-
-    ChangeNotifier.broadcastChange({userName},text);
+  const updateChanges= (text, changeType)=>{
+    ChangeNotifier.broadcastChange({userName},text,changeType);
   }
 
   //Update Check Ins
@@ -37,8 +48,11 @@ export default function MembersHandler(props) {
       text += " Out"
     }
     // const updatedMember = {name: member.name, checkedIn: !member.checkedIn}
-    checkInMember(member)
-    updateChanges(text)
+    await checkInMember(member)
+    await fetchMembers()
+
+    updateChanges(text, ChangeType.UpdateMember)
+
   }
   async function checkInMember(member) {
     
@@ -49,7 +63,6 @@ export default function MembersHandler(props) {
     });
     if (response?.status === 200) {
       await fetchMembers();
-
     } else {
       const body = await response.json();
       setDisplayError(`⚠ Error: `);
@@ -80,7 +93,7 @@ export default function MembersHandler(props) {
     await fetchMembers()
 
     let text = "Added member: " + value
-    updateChanges(text)
+    updateChanges(text, ChangeType.NewMember)
   }
   async function saveMembers(value) {
     const newMember = { name:value, checkedIn: false };
@@ -91,7 +104,6 @@ export default function MembersHandler(props) {
     });
     if (response?.status === 200) {
       await fetchMembers();
-
     } else {
       const body = await response.json();
       setDisplayError(`⚠ Error: `);
@@ -108,26 +120,26 @@ export default function MembersHandler(props) {
     });
     if (response?.status === 200) {
       await fetchMembers();
-
     } else {
       const body = await response.json();
       setDisplayError(`⚠ Error: `);
     }
-
     let text = "Removed member: " + member.name
-    updateChanges(text)
+    updateChanges(text, ChangeType.NewMember)
 
   }
 
   //Render Members List
-  const membersRender = members_.map((member, index) => {
+  const membersRender = [...members_]
+  .sort((a, b) => a.name.localeCompare(b.name)).map((member, index) => {
     return (
       <tr key={index}>
         <td>
           {member.name}</td>
         <td> <input type="checkbox"
           checked={member.checkedIn}
-          onChange={() => updateCheckedIn(member, index)} />
+          onChange={() => updateCheckedIn(member, index)}
+          />
 
           <button className="removeButton" onClick={() => removeMember(member, index)} >x</button>
 
@@ -153,7 +165,8 @@ export default function MembersHandler(props) {
         <input required type="text" id="name" placeholder="memberName"className="inputTextName" autoComplete="true"
         />
         <a className="add_member btn btn-success" onClick={(e) => addMemberNew(e)} role="button">+</a>
-        <Button onClick={() => resetData()}> Reset</Button>
+        {/* <Button onClick={() => resetData()}> Reset</Button>
+        <Button onClick={() => fetchMembers()}> Refresh</Button> */}
       </div>
     );
   }

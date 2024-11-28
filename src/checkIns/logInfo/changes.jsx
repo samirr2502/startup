@@ -18,7 +18,7 @@ export function Changes(props) {
   const clearChanges = ()=>{
     props.props.handleChangesList(() => [])
   }
-  const changesRender = changes.map((change, index) => {
+  const changesRender = [...changes].reverse().map((change, index) => {
     return (
       <tr key={index}>
         <td >
@@ -41,14 +41,6 @@ export function Changes(props) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              {userName}
-            </td>
-            <td>
-              Logged in
-            </td>
-          </tr>
             {changesRender}
         
         </tbody>
