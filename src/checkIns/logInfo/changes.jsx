@@ -2,8 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { ChangeNotifier } from '../changeNotifier';
 export function Changes(props) {
-  const userName = localStorage.getItem('userName')
-  const changes_old = props.props.changes
+
   const [changes, setChanges] = React.useState([]) 
   
   React.useEffect(()=>{
