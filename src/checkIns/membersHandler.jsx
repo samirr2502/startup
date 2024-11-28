@@ -148,7 +148,6 @@ export default function MembersHandler(props) {
     );
   });
   const resetData =  () => {
-    console.log(members_)
      fetch('/api/clear', {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' }

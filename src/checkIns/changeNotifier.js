@@ -35,8 +35,6 @@ class ChangeNotifierClass {
 
   broadcastChange(userName, _change,changeType) {
     const change = {userName:userName, change:_change, changeType:changeType};
-  
-    console.log(change)
     this.socket.send(JSON.stringify(change));
   }
 
@@ -50,7 +48,6 @@ class ChangeNotifierClass {
 
   receiveChange(change) {
     this.changes.push(change);
-    console.log(this.changes)
     this.changes.forEach((e) => {
       this.handlers.forEach((handler) => {
         handler(e);

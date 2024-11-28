@@ -110,7 +110,6 @@ secureApiRouter.post('/member', async (req, res) => {
   res.send(member);
 });
 secureApiRouter.delete('/remove', async (req, res) => {
-  console.log(req.body)
   const members = await DB.removeMember(req.body.memberName);
   //members= members.filter((_, i) => i !== req.body.i);
   const membersList = []
