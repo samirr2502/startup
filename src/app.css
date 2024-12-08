@@ -1,95 +1,50 @@
 .body {
-    display:flex;
-    flex-direction: column;
-    font-family:Arial, Helvetica, sans-serif;
-    text-align: center;
-
-}
-.input_element{
-    margin:10px 5px;
-    
-}
-
-.logo {
-    background-color: beige;
-    border: solid 1px;
-    border-radius: 10px;
-    width:50px;
-    height:50px;
-}
-
-.logo img {
-    overflow: hidden;
-}
-.lis_nav {
-    display: flex;
-}
-
-.dropdown_nav {
-    display:none;
-}
-footer {
-    flex:0 30px;
-}
-main {
-    flex:1;
     display: flex;
     flex-direction: column;
-    align-self: center;
-}
-main .content{
-    flex:1;
-    display: flex;
-    align-items: center;
+    height:100vh;
+    margin: 0;
     justify-content: center;
-    column-gap: 10px;
-}
-.content_left, .content_right {
-    width: 100%;
-    min-height: 300px;
-    box-shadow: 1px 1px 10px lightgrey;
-    flex:1;
-}
-main form div{
-    padding:10px 0;
-}
-.login_buttons{
-    display: flex;
-    flex-direction: row;
-}
-.login_buttons > * {
-    flex:1;
-    margin: 5px;
+    align-items: center;
+    background-color: black;
+
 }
 
-.meeting_edit_box, .meeting_log, .content_users{
-    max-height: 500px;
+.scrollable {
+    overflow-y: scroll; /* Or 'auto' if you want it to show only when necessary */
+  }
+  
+  .client::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+  }
+.client{
     overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+
+    margin:5% 0;
 }
-
-.carousel-inner img, .content_right img{
-    width:100%;
+h1 {
+    font-size: 6em;
 
 }
+#updatedText {
+  
+  }
 
-
+  .highlight {
+    opacity: 1; /* Fully visible */
+    transition: opacity 2s ease-in-out;
+  }
+  .fadeout {
+    opacity: 0; /* Fully visible */
+    transition: opacity 3s ease-in-out;
+  }
+ *{
+color:lightgrey;
+}
+.removeText, .useText{
+    cursor: pointer;
+}
 
 @media (max-width:770px){
-    main .content{
-        flex:1;
-        display: flex;
-        flex-direction: column;
-        row-gap: 20px;
-    }
-    .nav_bar_title {
-        display: none;
-    }
-    .dropdown_nav{
-        display: flex;
-    }
-    .login_buttons{
-        display: flex;
-        flex-direction: column;
-    }
     
 }
