@@ -1,0 +1,26 @@
+.removeButton{
+    opacity: 0.2;
+    margin-right: 0 2px;
+
+    float: right;
+}
+.removeButton:hover{
+    opacity: 1;
+}
+.add_buttons {
+ display: flex;
+ column-gap: 10px;
+ 
+ justify-content: center;
+}
+.add_member{
+    float:right;
+}
+#errorMessage {
+    color: red;
+}
+.checkIn, .logInfo {
+    align-self:start ;
+    max-height: 500px;
+    overflow-y: scroll;
+}
