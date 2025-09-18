@@ -1,5 +1,13 @@
-# MeetingPlanner
+# (Initially) MeetingPlanner (Now: Checkins)
 CS 260 Fall 2024 project 
+This app will help users put in a list of people or items, and checked them in as they come or as they complete a task.
+
+### Status: App is down for the moment. Come back later.
+
+
+# Old readme.
+
+
 This Web Application has the main purpose of creating an online hub for leaders on an LDS Ward to make changes to a sacrament meeting meeting, and for members to view the details on those meeting agenda.
 ***Change***
 This application will now focus on Checking Members in and out.
