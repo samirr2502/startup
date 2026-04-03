@@ -3,7 +3,7 @@ name: Daily Broadcast
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "5 9 1 1 6"
 jobs:
   call-backend:
     runs-on: ubuntu-latest
