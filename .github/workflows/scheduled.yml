@@ -1,0 +1,16 @@
+name: Daily Broadcast
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "11 19 * * *"
+      timezone: "America/Denver"
+
+jobs:
+  call-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger backend broadcast
+        run: |
+          curl -X POST "${{ secrets.BROADCAST_URL }}" \
+            -H "x-broadcast-secret: ${{ secrets.BROADCAST_SECRET }}"
