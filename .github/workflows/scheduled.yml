@@ -3,7 +3,7 @@ name: Daily Broadcast
 on:
   workflow_dispatch:
   schedule:
-    - cron: "30 19 * * *"
+    - cron: "10 20 * * *"
       timezone: "America/Denver"
 
 jobs:
